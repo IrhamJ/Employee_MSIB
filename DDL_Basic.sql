@@ -21,3 +21,11 @@ name VARCHAR(25)
 ); 
 
 -- Irham J
+
+-- Jihan
+CREATE TABLE tbl_jobs(
+	id varchar(10),
+	title varchar(35),
+	min_salary int,
+	max_salary int
+); -- jihan
