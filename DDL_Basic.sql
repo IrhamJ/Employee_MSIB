@@ -6,10 +6,12 @@ GO
 
 /*Start irvandhar*/
 
-CREATE TABLE tbl__permission(
+CREATE TABLE tbl_permission(
 	id int,
 	name varchar(100)
 );
+
+drop table tbl__permission;
 
 /*End irvandhar*/
 
@@ -28,4 +30,6 @@ CREATE TABLE tbl_jobs(
 	title varchar(35),
 	min_salary int,
 	max_salary int
-); -- jihan
+); 
+
+-- jihan
