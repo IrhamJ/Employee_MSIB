@@ -12,3 +12,12 @@ CREATE TABLE tbl__permission(
 );
 
 /*End irvandhar*/
+
+-- Irham J
+
+CREATE TABLE tbl_regions (
+id int,
+name VARCHAR(25)
+); 
+
+-- Irham J
