@@ -4,4 +4,11 @@ USE
 final_project_employee
 GO
 
---percobaan
+/*Start irvandhar*/
+
+CREATE TABLE tbl__permission(
+	id int,
+	name varchar(100)
+);
+
+/*End irvandhar*/
