@@ -16,9 +16,45 @@ CREATE TABLE tbl_permission(
 -- Irham J
 
 CREATE TABLE tbl_regions (
-id int,
-name VARCHAR(25)
+	id int,
+	name VARCHAR(25) NOT NULL
 ); 
+
+CREATE TABLE tbl_countries(
+	id char(3),
+	name VARCHAR(40) NOT NULL,
+	region int
+);
+
+CREATE TABLE tbl_locations(
+	id int,
+	street_address VARCHAR(40),
+	postal_code VARCHAR(12),
+	city VARCHAR(30) NOT NULL,
+	state_province VARCHAR(25),
+	country char(3)
+);
+
+CREATE TABLE tbl_departments(
+	id int,
+	name VARCHAR(30) NOT NULL,
+	location int
+);
+
+CREATE TABLE tbl_employee(
+	id int,
+	first_name VARCHAR(25) NOT NULL,
+	last_name VARCHAR(25),
+	gender VARCHAR(10) NOT NULL,
+	email VARCHAR(25),
+	phone VARCHAR(20),
+	hire_date DATE,
+	salary int, 
+	manager int,
+	job VARCHAR(10),
+	department int
+);
+
 
 -- Irham J
 
@@ -43,7 +79,7 @@ CREATE TABLE tbl_salary(
 	id int,
 	salary_per_hour int,
 	salary_per_day int,
-	working_out int
+	working_out int,
 	absensi int,
 	month_year date,
 	totalhour int
