@@ -22,7 +22,7 @@ name VARCHAR(25)
 
 -- Irham J
 
--- Jihan
+/*Start jihan azzahra*/
 CREATE TABLE tbl_jobs(
 	id varchar(10),
 	title varchar(35),
