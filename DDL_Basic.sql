@@ -24,7 +24,7 @@ name VARCHAR(25)
 
 -- Irham J
 
-/*Start jihan azzahra*/
+/*Start Jihan Azzahra*/
 CREATE TABLE tbl_jobs(
 	id varchar(10),
 	title varchar(35),
@@ -32,4 +32,4 @@ CREATE TABLE tbl_jobs(
 	max_salary int
 ); 
 
--- jihan
+/*End Jihan Azzahra*/
