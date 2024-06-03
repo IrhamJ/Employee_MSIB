@@ -11,8 +11,6 @@ CREATE TABLE tbl_permission(
 	name varchar(100)
 );
 
-drop table tbl__permission;
-
 /*End irvandhar*/
 
 -- Irham J
