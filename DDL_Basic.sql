@@ -11,6 +11,31 @@ CREATE TABLE tbl_permission(
 	name varchar(100)
 );
 
+CREATE TABLE tbl_role_permissions(
+	id int,
+	role int,
+	permission int
+);
+
+CREATE TABLE tbl_roles(
+	id int,
+	name varchar(50)
+);
+
+CREATE TABLE tbl_account_roles(
+	id int,
+	account int,
+	role int
+);
+
+CREATE TABLE tbl_account(
+	id int,
+	username varchar(25),
+	password varchar(255),
+	otp int,
+	is_expired datetime,
+	is_used bit
+);
 /*End irvandhar*/
 
 -- Irham J
