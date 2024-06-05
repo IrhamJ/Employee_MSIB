@@ -219,7 +219,7 @@ ALTER TABLE tbl_job_histories ALTER COLUMN status varchar(10) NOT NULL;
 ALTER TABLE tbl_job_histories ALTER COLUMN job varchar(10) NOT NULL;
 ALTER TABLE tbl_job_histories ALTER COLUMN department int NOT NULL;
 ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_tbl_jobs FOREIGN KEY (job) REFERENCES tbl_jobs (id);
-
+ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_tbl_Department_JoB_History FOREIGN KEY (department) REFERENCES tbl_departments (id);
 --tbl_absensi
 ALTER TABLE tbl_absensi alter column id INT NOT NULL;
 ALTER TABLE tbl_absensi ADD CONSTRAINT PK_tbl_absensi PRIMARY KEY(id);
@@ -240,5 +240,6 @@ ALTER TABLE tbl_salary_history ADD CONSTRAINT FK_Employee__salary_history FOREIG
 ALTER TABLE tbl_salary_history ALTER COLUMN status varchar(10) NOT NULL;
 ALTER TABLE tbl_salary_history ALTER COLUMN id_salary int NOT NULL;
 ALTER TABLE tbl_salary_history ALTER COLUMN job varchar(10) NOT NULL;
-ALTER TABLE tbl_salary_history ALTER COLUMN department int NOT NULL; --belum solve
+ALTER TABLE tbl_salary_history ALTER COLUMN department int NOT NULL;|
+ALTER TABLE tbl_salary_history ADD CONSTRAINT FK_Department_Salary_History FOREIGN KEY (department) REFERENCES tbl_departments (id);
 /*End Jihan Azzahra*/
