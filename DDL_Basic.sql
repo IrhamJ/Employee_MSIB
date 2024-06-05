@@ -50,7 +50,7 @@ ALTER TABLE tbl_role_permissions ALTER COLUMN role INT NOT NULL;
 ALTER TABLE tbl_role_permissions ALTER COLUMN permission INT NOT NULL;
 ALTER TABLE tbl_role_permissions ADD CONSTRAINT PK_tbl_role_permissions PRIMARY KEY (id);
 ALTER TABLE tbl_role_permissions ADD CONSTRAINT FK_tbl_role_permissions_permission FOREIGN KEY (permission) REFERENCES tbl_permission(id);
-ALTER TABLE tbl_role_permissions ADD CONSTRAINT FK_tbl_role_permissions FOREIGN KEY (role) REFERENCES tbl_roles(id);
+ALTER TABLE tbl_role_permissions ADD CONSTRAINT FK_tbl_role_permissions_role FOREIGN KEY (role) REFERENCES tbl_roles(id);
 
 /*tbl_roles*/
 ALTER TABLE tbl_roles ALTER COLUMN id INT NOT NULL;
