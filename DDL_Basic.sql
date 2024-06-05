@@ -127,5 +127,41 @@ CREATE TABLE tbl_salary_history(
 	job varchar(10),
 	department int
 );
+/*End Jihan Azzahra*/
+
+/*Start Jihan Azzahra*/
+
+--tbl_jobs
+ALTER TABLE tbl_jobs ALTER COLUMN id varchar(10) NOT NULL;
+ALTER TABLE tbl_jobs ADD CONSTRAINT PK_tbl_jobs PRIMARY KEY (id); 
+ALTER TABLE tbl_jobs ALTER COLUMN title varchar(35) NOT NULL;
+
+--tbl_job_histories
+ALTER TABLE tbl_job_histories ALTER COLUMN id_employee int(6,0) NOT NULL;
+ALTER TABLE tbl_job_histories ALTER COLUMN id_employee int(6); -- belum solve
+ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_ -- belum bisa
+ALTER TABLE tbl_job_histories ADD CONSTRAINT PK_tbl_job_histories PRIMARY KEY (start_date); --belum solve
+ALTER TABLE tbl_job_histories ALTER COLUMN status varchar(10) NOT NULL;
+ALTER TABLE tbl_job_histories ALTER COLUMN job varchar(10) NOT NULL;
+ALTER TABLE tbl_job_histories ALTER COLUMN department int(6) NOT NULL; --belum solve
+
+--tbl_salary
+ALTER TABLE tbl_salary ALTER COLUMN id int NOT NULL;
+ALTER TABLE tbl_salary ADD CONSTRAINT PK_tbl_salary PRIMARY KEY(id);
+ALTER TABLE tbl_salary ALTER COLUMN absensi int NOT NULL;
+ALTER TABLE tbl_salary ADD CONSTRAINT FK_tbl_salary FOREIGN KEY (absensi) REFERENCES tbl_absensi (id); --belum solve
+
+--tbl_absensi
+ALTER TABLE tbl_absensi ADD CONSTRAINT PK_tbl_absensi PRIMARY KEY(id); --belum solve
+ALTER TABLE tbl_absensi ALTER COLUMN id_employee int NOT NULL;
+ALTER TABLE tbl_absensi ADD CONSTRAINT FK_tbl_absensi FOREIGN KEY (id_employee) REFERENCES tbl_employee (id_employee); --belum solve
+ALTER TABLE tbl_absensi ALTER COLUMN status varchar(10) NOT NULL; 
+
+--tbl_salary_history
+ALTER TABLE tbl_salary_history ADD FOREIGN KEY (id_employee) REFERENCES tbl_employee(id_employee); --belum solve
+ALTER TABLE tbl_salary_history --belum tau PK atau FK
+ALTER TABLE tbl_salary_history ALTER COLUMN status varchar(10) NOT NULL;
+ALTER TABLE tbl_salary_history ALTER COLUMN job varchar(10) NOT NULL;
+ALTER TABLE tbl_salary_history ALTER COLUMN department int(6) NOT NULL; --belum solve
 
 /*End Jihan Azzahra*/
