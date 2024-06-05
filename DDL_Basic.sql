@@ -71,7 +71,7 @@ ALTER TABLE tbl_account ALTER COLUMN username VARCHAR(25) NOT NULL;
 ALTER TABLE tbl_account ALTER COLUMN password VARCHAR(255) NOT NULL;
 ALTER TABLE tbl_account ALTER COLUMN otp INT NOT NULL;
 ALTER TABLE tbl_account ADD CONSTRAINT PK_tbl_account PRIMARY KEY (id);
-
+ALTER TABLE tbl_account ADD CONSTRAINT FK_tbl_account_employee FOREIGN KEY (id) REFERENCES tbl_employee(id);
 
 /*End Constraint */
 
@@ -118,8 +118,42 @@ CREATE TABLE tbl_employee(
 	job VARCHAR(10),
 	department int
 );
+-- START CONSTRAINT --
+-- TBL REGION
+ALTER TABLE tbl_regions ALTER COLUMN id int NOT NULL;
+ALTER TABLE tbl_regions ADD CONSTRAINT PK_TBL_REGIONS PRIMARY KEY (id); 
 
+-- TBL Countries
+ALTER TABLE tbl_countries ALTER COLUMN id char(3) NOT NULL;
+ALTER TABLE tbl_countries ALTER COLUMN region int NOT NULL;
+ALTER TABLE tbl_countries ADD CONSTRAINT PK_TBL_Countries PRIMARY KEY (id); 
+ALTER TABLE tbl_countries ADD CONSTRAINT FK_TBL_REGIONS FOREIGN KEY (region) REFERENCES tbl_regions (id);
 
+-- TBL Locations
+ALTER TABLE tbl_locations ALTER COLUMN id int NOT NULL;
+ALTER TABLE tbl_locations ALTER COLUMN country char(3) NOT NULL;
+ALTER TABLE tbl_locations ADD CONSTRAINT PK_TBL_Locations PRIMARY KEY (id); 
+ALTER TABLE tbl_locations ADD CONSTRAINT FK_TBL_Countries FOREIGN KEY (country) REFERENCES tbl_countries (id);
+
+-- TBL Departments
+ALTER TABLE tbl_departments ALTER COLUMN id int NOT NULL;
+ALTER TABLE tbl_departments ALTER COLUMN location int NOT NULL;
+ALTER TABLE tbl_departments ADD CONSTRAINT PK_TBL_Departments PRIMARY KEY (id); 
+ALTER TABLE tbl_departments ADD CONSTRAINT FK_TBL_Location FOREIGN KEY (location) REFERENCES tbl_locations (id);
+
+-- TBL Employees
+ALTER TABLE tbl_employee ALTER COLUMN id int NOT NULL;
+ALTER TABLE tbl_employee ADD CONSTRAINT PK_TBL_Employee PRIMARY KEY (id);
+ALTER TABLE tbl_employee ALTER COLUMN email VARCHAR(25) NOT NULL;
+ALTER TABLE tbl_employee ADD CONSTRAINT UQ_tbl_Employee_email UNIQUE (email);
+ALTER TABLE tbl_employee ALTER COLUMN department int NOT NULL;
+ALTER TABLE tbl_employee ADD CONSTRAINT FK_TBL_Department FOREIGN KEY (department) REFERENCES tbl_departments (id);
+ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_employee_manager FOREIGN KEY (manager) REFERENCES tbl_employee(id);
+ALTER TABLE tbl_employee ALTER COLUMN salary int NOT NULL;
+ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_salary_employee FOREIGN KEY (salary) REFERENCES tbl_salary (id);
+ALTER TABLE tbl_employee ALTER COLUMN job VARCHAR(10) NOT NULL;
+ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_jobs_employee FOREIGN KEY (job) REFERENCES tbl_jobs (id);
+-- END CONSTRAINT --
 -- Irham J
 
 /*Start Jihan Azzahra*/
@@ -166,9 +200,9 @@ CREATE TABLE tbl_salary_history(
 	job varchar(10),
 	department int
 );
+/*End Jihan Azzahra*/
 
-
-/*Start Constraint*/
+/*Start Jihan Azzahra*/
 
 --tbl_jobs
 ALTER TABLE tbl_jobs ALTER COLUMN id varchar(10) NOT NULL;
@@ -176,13 +210,22 @@ ALTER TABLE tbl_jobs ADD CONSTRAINT PK_tbl_jobs PRIMARY KEY (id);
 ALTER TABLE tbl_jobs ALTER COLUMN title varchar(35) NOT NULL;
 
 --tbl_job_histories
-ALTER TABLE tbl_job_histories ALTER COLUMN id_employee int(6,0) NOT NULL;
-ALTER TABLE tbl_job_histories ALTER COLUMN id_employee int(6); -- belum solve
-ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_ -- belum bisa
-ALTER TABLE tbl_job_histories ADD CONSTRAINT PK_tbl_job_histories PRIMARY KEY (start_date); --belum solve
+SELECT * FROM tbl_job_histories;
+ALTER TABLE tbl_job_histories ALTER COLUMN id_employee INT NOT NULL;
+ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_Employee_history FOREIGN KEY (id_employee) REFERENCES tbl_employee (id);
+ALTER TABLE tbl_job_histories ALTER COLUMN start_date DATE NOT NULL;
+ALTER TABLE tbl_job_histories ADD CONSTRAINT PK_tbl_job_histories PRIMARY KEY (start_date);
 ALTER TABLE tbl_job_histories ALTER COLUMN status varchar(10) NOT NULL;
 ALTER TABLE tbl_job_histories ALTER COLUMN job varchar(10) NOT NULL;
-ALTER TABLE tbl_job_histories ALTER COLUMN department int(6) NOT NULL; --belum solve
+ALTER TABLE tbl_job_histories ALTER COLUMN department int NOT NULL;
+ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_tbl_jobs FOREIGN KEY (job) REFERENCES tbl_jobs (id);
+
+--tbl_absensi
+ALTER TABLE tbl_absensi alter column id INT NOT NULL;
+ALTER TABLE tbl_absensi ADD CONSTRAINT PK_tbl_absensi PRIMARY KEY(id);
+ALTER TABLE tbl_absensi ALTER COLUMN id_employee int NOT NULL;
+ALTER TABLE tbl_absensi ADD CONSTRAINT FK_Employee_Absen FOREIGN KEY (id_employee) REFERENCES tbl_employee (id);
+ALTER TABLE tbl_absensi ALTER COLUMN status varchar(10) NOT NULL; 
 
 --tbl_salary
 ALTER TABLE tbl_salary ALTER COLUMN id int NOT NULL;
@@ -190,20 +233,12 @@ ALTER TABLE tbl_salary ADD CONSTRAINT PK_tbl_salary PRIMARY KEY(id);
 ALTER TABLE tbl_salary ALTER COLUMN absensi int NOT NULL;
 ALTER TABLE tbl_salary ADD CONSTRAINT FK_tbl_salary FOREIGN KEY (absensi) REFERENCES tbl_absensi (id); --belum solve
 
---tbl_absensi
-ALTER TABLE tbl_absensi ADD CONSTRAINT PK_tbl_absensi PRIMARY KEY(id); --belum solve
-ALTER TABLE tbl_absensi ALTER COLUMN id_employee int NOT NULL;
-ALTER TABLE tbl_absensi ADD CONSTRAINT FK_tbl_absensi FOREIGN KEY (id_employee) REFERENCES tbl_employee (id_employee); --belum solve
-ALTER TABLE tbl_absensi ALTER COLUMN status varchar(10) NOT NULL; 
-
 --tbl_salary_history
-ALTER TABLE tbl_salary_history ADD FOREIGN KEY (id_employee) REFERENCES tbl_employee(id_employee); --belum solve
-ALTER TABLE tbl_salary_history --belum tau PK atau FK
+ALTER TABLE tbl_salary_history ADD CONSTRAINT FK_tbl_salary_history_tbl_salary FOREIGN KEY (id_salary) REFERENCES tbl_salary(id);
+ALTER TABLE tbl_salary_history ADD CONSTRAINT PK_tbl_salary_history PRIMARY KEY(id_salary);
+ALTER TABLE tbl_salary_history ADD CONSTRAINT FK_Employee__salary_history FOREIGN KEY (id_employee) REFERENCES tbl_employee (id);
 ALTER TABLE tbl_salary_history ALTER COLUMN status varchar(10) NOT NULL;
+ALTER TABLE tbl_salary_history ALTER COLUMN id_salary int NOT NULL;
 ALTER TABLE tbl_salary_history ALTER COLUMN job varchar(10) NOT NULL;
-ALTER TABLE tbl_salary_history ALTER COLUMN department int(6) NOT NULL; --belum solve
-
-/*End Constraint*/
-
+ALTER TABLE tbl_salary_history ALTER COLUMN department int NOT NULL; --belum solve
 /*End Jihan Azzahra*/
-
