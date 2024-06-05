@@ -36,6 +36,45 @@ CREATE TABLE tbl_account(
 	is_expired datetime,
 	is_used bit
 );
+
+/*Start Constraint*/
+
+/*tbl_permission*/
+ALTER TABLE tbl_permission ALTER COLUMN id INT NOT NULL;
+ALTER TABLE tbl_permission ALTER COLUMN name VARCHAR(100) NOT NULL;
+ALTER TABLE tbl_permission ADD CONSTRAINT PK_tbl_permission PRIMARY KEY (id);
+
+/*tbl_role_permissions*/
+ALTER TABLE tbl_role_permissions ALTER COLUMN id INT NOT NULL;
+ALTER TABLE tbl_role_permissions ALTER COLUMN role INT NOT NULL;
+ALTER TABLE tbl_role_permissions ALTER COLUMN permission INT NOT NULL;
+ALTER TABLE tbl_role_permissions ADD CONSTRAINT PK_tbl_role_permissions PRIMARY KEY (id);
+ALTER TABLE tbl_role_permissions ADD CONSTRAINT FK_tbl_role_permissions_permission FOREIGN KEY (permission) REFERENCES tbl_permission(id);
+ALTER TABLE tbl_role_permissions ADD CONSTRAINT FK_tbl_role_permissions FOREIGN KEY (role) REFERENCES tbl_roles(id);
+
+/*tbl_roles*/
+ALTER TABLE tbl_roles ALTER COLUMN id INT NOT NULL;
+ALTER TABLE tbl_roles ALTER COLUMN name VARCHAR(50) NOT NULL;
+ALTER TABLE tbl_roles ADD CONSTRAINT PK_tbl_roles PRIMARY KEY (id);
+
+/*tbl_account_roles*/
+ALTER TABLE tbl_account_roles ALTER COLUMN id INT NOT NULL;
+ALTER TABLE tbl_account_roles ALTER COLUMN account INT NOT NULL;
+ALTER TABLE tbl_account_roles ALTER COLUMN role INT NOT NULL;
+ALTER TABLE tbl_account_roles ADD CONSTRAINT PK_tbl_account_roles PRIMARY KEY (id);
+ALTER TABLE tbl_account_roles ADD CONSTRAINT FK_tbl_account_roles_role FOREIGN KEY (role) REFERENCES tbl_roles(id);
+ALTER TABLE tbl_account_roles ADD CONSTRAINT FK_tbl_account_roles_account FOREIGN KEY (account) REFERENCES tbl_account(id);
+
+/*tbl_account*/
+ALTER TABLE tbl_account ALTER COLUMN id INT NOT NULL;
+ALTER TABLE tbl_account ALTER COLUMN username VARCHAR(25) NOT NULL;
+ALTER TABLE tbl_account ALTER COLUMN password VARCHAR(255) NOT NULL;
+ALTER TABLE tbl_account ALTER COLUMN otp INT NOT NULL;
+ALTER TABLE tbl_account ADD CONSTRAINT PK_tbl_account PRIMARY KEY (id);
+
+
+/*End Constraint */
+
 /*End irvandhar*/
 
 -- Irham J
@@ -129,3 +168,4 @@ CREATE TABLE tbl_salary_history(
 );
 
 /*End Jihan Azzahra*/
+
