@@ -166,9 +166,9 @@ CREATE TABLE tbl_salary_history(
 	job varchar(10),
 	department int
 );
-/*End Jihan Azzahra*/
 
-/*Start Jihan Azzahra*/
+
+/*Start Constraint*/
 
 --tbl_jobs
 ALTER TABLE tbl_jobs ALTER COLUMN id varchar(10) NOT NULL;
@@ -202,6 +202,8 @@ ALTER TABLE tbl_salary_history --belum tau PK atau FK
 ALTER TABLE tbl_salary_history ALTER COLUMN status varchar(10) NOT NULL;
 ALTER TABLE tbl_salary_history ALTER COLUMN job varchar(10) NOT NULL;
 ALTER TABLE tbl_salary_history ALTER COLUMN department int(6) NOT NULL; --belum solve
+
+/*End Constraint*/
 
 /*End Jihan Azzahra*/
 
