@@ -4,3 +4,4 @@ GO
 CREATE VIEW vw_permission AS
 SELECT id, name 
 FROM tbl_permission;
+

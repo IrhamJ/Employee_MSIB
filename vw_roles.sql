@@ -4,3 +4,4 @@ GO
 CREATE VIEW vw_role AS
 SELECT id, name 
 FROM tbl_roles;
+
