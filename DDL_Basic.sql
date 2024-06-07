@@ -233,7 +233,7 @@ ALTER TABLE tbl_salary ALTER COLUMN id int NOT NULL;
 ALTER TABLE tbl_salary ADD CONSTRAINT PK_tbl_salary PRIMARY KEY(id);
 ALTER TABLE tbl_salary ALTER COLUMN absensi int NOT NULL; --Ubah ke yang bawah
 ALTER TABLE tbl_salary ALTER COLUMN absensi int;-- ini, klo udah bener insrt ubah ke atas.
-ALTER TABLE tbl_salary ADD CONSTRAINT FK_tbl_salary FOREIGN KEY (absensi) REFERENCES tbl_absensi (id); --belum solve
+ALTER TABLE tbl_salary ADD CONSTRAINT FK_tbl_salary FOREIGN KEY (absensi) REFERENCES tbl_absensi (id);
 
 --tbl_salary_history
 ALTER TABLE tbl_salary_history ADD CONSTRAINT FK_tbl_salary_history_tbl_salary FOREIGN KEY (id_salary) REFERENCES tbl_salary(id);

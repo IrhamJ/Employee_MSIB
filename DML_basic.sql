@@ -21,9 +21,9 @@ SELECT id, role, permission FROM tbl_role_permissions;
 INSERT INTO tbl_account (id, username, password, otp, is_expired, is_used)
 VALUES 
 (1, 'alicejohnson', 'password123', 123456, '2024-01-15 12:00:00', 0), -- Tidak expired
-(2, 'bobsmith', 'password456', 654321, '2024-05-20 08:30:00', 1);    -- Expired
+(2, 'bobsmith', 'password456', 654321, '2024-05-20 08:30:00', 1),   -- Expired
 (3, 'charliebrown', 'password789', 987654, '2023-03-10 09:15:00', 0), -- Tidak expired
-(4, 'davidwilson', 'password012', 210987, '2022-07-25 14:45:00', 1), -- Expired
+(4, 'davidwilson', 'password012', 210987, '2022-07-25 14:45:00', 1); -- Expired
 
 -- Menambahkan entri employee
 INSERT INTO tbl_account (id, username, password, otp, is_expired, is_used)
