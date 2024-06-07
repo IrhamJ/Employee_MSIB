@@ -17,9 +17,40 @@ VALUES (210001,120100,100001),(210002,120200,100002),(210003,130300,100003),(240
 
 SELECT id, role, permission FROM tbl_role_permissions;
 
---INSERT INTO tbl_account
+-- Menambahkan entri manager
+INSERT INTO tbl_account (id, username, password, otp, is_expired, is_used)
+VALUES 
+(1, 'alicejohnson', 'password123', 123456, '2024-01-15 12:00:00', 0), -- Tidak expired
+(2, 'bobsmith', 'password456', 654321, '2024-05-20 08:30:00', 1);    -- Expired
+(3, 'charliebrown', 'password789', 987654, '2023-03-10 09:15:00', 0), -- Tidak expired
+(4, 'davidwilson', 'password012', 210987, '2022-07-25 14:45:00', 1), -- Expired
 
-/*tbl_account dan tbl_account_roles belum*/
+-- Menambahkan entri employee
+INSERT INTO tbl_account (id, username, password, otp, is_expired, is_used)
+VALUES 
+(5, 'evagreen', 'password345', 543210, '2021-12-05 11:30:00', 0), -- Tidak expired
+(6, 'fionahall', 'password678', 876543, '2022-10-15 16:00:00', 1), -- Expired
+(7, 'georgeking', 'password901', 109876, '2021-09-30 10:00:00', 0), -- Tidak expired
+(8, 'hannahlee', 'password234', 432109, '2023-02-20 13:15:00', 1), -- Expired
+(9, 'ianmoore', 'password567', 765432, '2022-04-10 07:45:00', 0), -- Tidak expired
+(10, 'juliadavis', 'password890', 098765, '2023-01-05 17:30:00', 1); -- Expired
+
+SELECT * FROM tbl_account;
+
+--insrt tbl_account_role
+INSERT INTO tbl_account_roles (id, account, role)
+VALUES 
+(1, 1, 130300), -- alicejohnson sebagai Manager
+(2, 2, 130300), -- bobsmith sebagai Manager
+(3, 3, 130300), -- charliebrown sebagai Employee
+(4, 4, 130300), -- davidwilson sebagai Employee
+(5, 5, 140400), -- evagreen sebagai Employee
+(6, 6, 140400), -- fionahall sebagai Employee
+(7, 7, 140400), -- georgeking sebagai Employee
+(8, 8, 140400), -- hannahlee sebagai Employee
+(9, 9, 140400), -- ianmoore sebagai Employee
+(10, 10, 140400); -- juliadavis sebagai Employee
+
 
 /*DML End Irvan*/
 
