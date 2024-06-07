@@ -174,7 +174,13 @@ VALUES
 (5, 105, '2023-10-01 09:00:00', '2023-10-01 18:00:00', 'Present', '09:00:00');
 
 --INSERT INTO salary_history
-
+INSERT INTO tbl_salary_history (id_employee, id_salary, end_date, status, job, department)
+VALUES
+(1, 2, '2023-08-01', 'inactive', 'Analyst', 600100),
+(2, 3, '2023-10-01', 'contract', 'Designer', 600300),
+(3, 4, '2023-07-01', 'terminated', 'Manager', 600200),
+(4, 5, '2023-04-01', 'retired', 'Consult', 600400),
+(5, 6, '2023-01-05',  'contract', 'Architect', 600300);
 
 /*DML End Jihan Azzahra*/
 
