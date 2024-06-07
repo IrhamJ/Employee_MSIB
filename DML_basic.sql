@@ -73,24 +73,56 @@ SELECT * FROM tbl_departments;
 -- DML Irham J -- 
 
 
--- Hiraukan Coba coba
-SELECT 
-    d.name AS DepartmentName,
-    l.city AS City,
-    l.state_province AS Province,
-    c.name AS Country,
-    r.name AS Region
-FROM 
-    tbl_departments d
-JOIN 
-    tbl_locations l ON d.location = l.id
-JOIN 
-    tbl_countries c ON l.country = c.id
-JOIN 
-    tbl_regions r ON c.region = r.id;
+/*DML Start Jihan Azzahra*/
+--jobs, jobs_histories, absensi, salary, salary_histories
 
--- Verifikasi data
-SELECT * FROM tbl_departments d
-JOIN tbl_locations l ON d.location = l.id
-JOIN tbl_countries c ON l.country = c.id
-JOIN tbl_regions r ON c.region = r.id;
+--INSERT INTO tbl_jobs
+INSERT INTO tbl_jobs (id, title, min_salary, max_salary)
+VALUES 
+('AppDevJr', 'Junior_researcher', 10000000, 12000000),
+('WebDevSr', 'Senior_developer', 15000000, 20000000),
+('DataSci', 'Data_scientist', 18000000, 25000000),
+('ProjMgr', 'Project_manager', 20000000, 30000000),
+('UXDes', 'UX Designer', 12000000, 18000000);
+
+SELECT id, title, min_salary, max_salary FROM tbl_jobs;
+
+--INSERT INTO tbl_job_histories
+INSERT INTO tbl_job_histories (id_employee, start_date, end_date, status, job, department)
+VALUES
+(118633, '2010-08-18', '2012-10-11', 'Resigned', 'AppDevJr', 143633),
+(118634, '2013-01-15', '2015-06-20', 'Promoted', 'WebDevSr', 143634),
+(118635, '2016-02-25', '2018-09-30', 'Transferred', 'DataSci', 143635),
+(118636, '2019-11-01', '2021-12-31', 'Terminated', 'ProjMgr', 143636),
+(118637, '2008-07-15', '2019-11-05', 'Retired', 'UXDes', 143637);
+
+SELECT id_employee, start_date, end_date, status, job, department
+FROM tbl_job_histories;
+
+--INSERT INTO salary
+INSERT INTO tbl_salary (id, salary_per_hour, salary_per_day, working_hour, absensi, month_year, totalhour)
+VALUES 
+(2, 55000, 440000, 8, 1, '2023-10-01', 176),
+(3, 60000, 480000, 8, 0, '2023-10-01', 184),
+(4, 65000, 520000, 8, 3, '2023-10-01', 152),
+(5, 70000, 560000, 8, 2, '2023-10-01', 168),
+(6, 80000, 640000, 8, 1, '2023-10-01', 200);
+
+SELECT id, salary_per_hour, salary_per_day, working_hour, absensi, month_year, totalhour
+FROM tbl_salary;
+
+--INSERT INTO absensi
+INSERT INTO tbl_absensi (id, id_employee, clock_in, clock_out, status, time)
+VALUES
+(1, 101, '2023-10-01 08:00:00', '2023-10-01 17:00:00', 'Present', '09:00:00'),
+(2, 102, '2023-10-01 08:15:00', '2023-10-01 17:15:00', 'Present', '09:00:00'),
+(3, 103, '2023-10-01 08:30:00', '2023-10-01 17:30:00', 'Present', '09:00:00'),
+(4, 104, '2023-10-01 08:45:00', '2023-10-01 17:45:00', 'Present', '09:00:00'),
+(5, 105, '2023-10-01 09:00:00', '2023-10-01 18:00:00', 'Present', '09:00:00');
+
+--INSERT INTO salary_history
+
+
+
+/*DML End Jihan Azzahra*/
+
