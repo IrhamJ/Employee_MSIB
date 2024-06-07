@@ -177,12 +177,13 @@ CREATE TABLE tbl_salary(
 	id int,
 	salary_per_hour int,
 	salary_per_day int,
-	working_out int,
+	working_hour int,
 	absensi int,
 	month_year date,
 	totalhour int
 );
-
+EXEC sp_rename 'tbl_salary.working_out', 'working_hour', 'COLUMN';
+SELECT * FROM tbl_salary
 CREATE TABLE tbl_absensi(
 	id int,
 	id_employee int,
@@ -231,6 +232,7 @@ ALTER TABLE tbl_absensi ALTER COLUMN status varchar(10) NOT NULL;
 ALTER TABLE tbl_salary ALTER COLUMN id int NOT NULL;
 ALTER TABLE tbl_salary ADD CONSTRAINT PK_tbl_salary PRIMARY KEY(id);
 ALTER TABLE tbl_salary ALTER COLUMN absensi int NOT NULL;
+ALTER TABLE tbl_salary ALTER COLUMN absensi int;
 ALTER TABLE tbl_salary ADD CONSTRAINT FK_tbl_salary FOREIGN KEY (absensi) REFERENCES tbl_absensi (id); --belum solve
 
 --tbl_salary_history

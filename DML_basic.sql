@@ -70,6 +70,28 @@ INSERT INTO tbl_departments (id, name, location) VALUES
 (600600, 'R&D', 500300); -- Surabaya
 
 SELECT * FROM tbl_departments;
+
+-- Add Employee
+-- Manager Entries
+INSERT INTO tbl_employee (id, first_name, last_name, gender, email, phone, hire_date, salary, manager, job, department)
+VALUES
+(1, 'Alice', 'Johnson', 'Female', 'alice.johnson@example.com', '123-456-7890', '2022-01-15', 2, NULL, 'ProjMgr', 600100), -- Jakarta, HR
+(2, 'Bob', 'Smith', 'Male', 'bob.smith@example.com', '234-567-8901', '2021-05-20', 3, NULL, 'WebDevSr', 600300); -- Bandung, IT
+
+-- Employee Entries
+INSERT INTO tbl_employee (id, first_name, last_name, gender, email, phone, hire_date, salary, manager, job, department)
+VALUES
+(3, 'Charlie', 'Brown', 'Male', 'charlie.brown@example.com', '345-678-9012', '2023-03-10', 4, 1, 'UXDes', 600200), -- Jakarta, Finance, Manager: Alice
+(4, 'David', 'Wilson', 'Male', 'david.wilson@example.com', '456-789-0123', '2022-07-25', 5, 1, 'AppDevJr', 600400), -- Bandung, Marketing, Manager: Alice
+(5, 'Eva', 'Green', 'Female', 'eva.green@example.com', '567-890-1234', '2021-12-05', 6, 2, 'DataSci', 600300), -- Bandung, IT, Manager: Bob
+(6, 'Fiona', 'Hall', 'Female', 'fiona.hall@example.com', '678-901-2345', '2022-10-15', 4, 2, 'AppDevJr', 600500), -- Surabaya, Sales, Manager: Bob
+(7, 'George', 'King', 'Male', 'george.king@example.com', '789-012-3456', '2021-09-30', 3, 1, 'UXDes', 600100), -- Jakarta, HR, Manager: Alice
+(8, 'Hannah', 'Lee', 'Female', 'hannah.lee@example.com', '890-123-4567', '2023-02-20', 2, 1, 'AppDevJr', 600200), -- Jakarta, Finance, Manager: Alice
+(9, 'Ian', 'Moore', 'Male', 'ian.moore@example.com', '901-234-5678', '2022-04-10', 5, 2, 'DataSci', 600400), -- Bandung, Marketing, Manager: Bob
+(10, 'Julia', 'Davis', 'Female', 'julia.davis@example.com', '012-345-6789', '2023-01-05', 6, 2, 'ProjMgr', 600600); -- Surabaya, R&D, Manager: Bob
+
+SELECT * FROM tbl_employee
+
 -- DML Irham J -- 
 
 
@@ -90,23 +112,23 @@ SELECT id, title, min_salary, max_salary FROM tbl_jobs;
 --INSERT INTO tbl_job_histories
 INSERT INTO tbl_job_histories (id_employee, start_date, end_date, status, job, department)
 VALUES
-(118633, '2010-08-18', '2012-10-11', 'Resigned', 'AppDevJr', 143633),
-(118634, '2013-01-15', '2015-06-20', 'Promoted', 'WebDevSr', 143634),
-(118635, '2016-02-25', '2018-09-30', 'Transferred', 'DataSci', 143635),
-(118636, '2019-11-01', '2021-12-31', 'Terminated', 'ProjMgr', 143636),
-(118637, '2008-07-15', '2019-11-05', 'Retired', 'UXDes', 143637);
+(1, '2010-08-18', '2012-10-11', 'Resigned', 'AppDevJr', 600100),
+(2, '2013-01-15', '2015-06-20', 'Promoted', 'WebDevSr', 600300),
+(3, '2016-02-25', '2018-09-30', 'Transfer', 'DataSci', 600200),
+(4, '2019-11-01', '2021-12-31', 'Terminated', 'ProjMgr', 600400),
+(5, '2008-07-15', '2019-11-05', 'Retired', 'UXDes', 600300);
 
 SELECT id_employee, start_date, end_date, status, job, department
 FROM tbl_job_histories;
 
 --INSERT INTO salary
-INSERT INTO tbl_salary (id, salary_per_hour, salary_per_day, working_hour, absensi, month_year, totalhour)
+INSERT INTO tbl_salary (id, salary_per_hour, salary_per_day, working_hour, month_year, totalhour)
 VALUES 
-(2, 55000, 440000, 8, 1, '2023-10-01', 176),
-(3, 60000, 480000, 8, 0, '2023-10-01', 184),
-(4, 65000, 520000, 8, 3, '2023-10-01', 152),
-(5, 70000, 560000, 8, 2, '2023-10-01', 168),
-(6, 80000, 640000, 8, 1, '2023-10-01', 200);
+(2, 55000, 440000, 8, '2023-10-01', 176),
+(3, 60000, 480000, 8, '2023-10-01', 184),
+(4, 65000, 520000, 8, '2023-10-01', 152),
+(5, 70000, 560000, 8, '2023-10-01', 168),
+(6, 80000, 640000, 8, '2023-10-01', 200);
 
 SELECT id, salary_per_hour, salary_per_day, working_hour, absensi, month_year, totalhour
 FROM tbl_salary;
@@ -123,6 +145,10 @@ VALUES
 --INSERT INTO salary_history
 
 
-
 /*DML End Jihan Azzahra*/
 
+SELECT * FROM tbl_salary
+
+SELECT * FROM tbl_jobs
+
+SELECT * FROM tbl_departments
