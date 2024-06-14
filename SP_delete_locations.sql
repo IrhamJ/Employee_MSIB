@@ -12,6 +12,6 @@ BEGIN
     WHERE id = @id
 END
 
-EXEC SP_delete_locations @id = 500100
+EXEC SP_delete_locations @id = 500200
 
 SELECT * FROM tbl_locations

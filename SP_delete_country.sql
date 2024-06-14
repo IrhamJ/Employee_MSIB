@@ -12,6 +12,9 @@ BEGIN
 END
 
 EXEC SP_delete_country @id = 'ID'
+
+
+
 SELECT * FROM tbl_countries
 
 DROP PROCEDURE SP_delete_country
