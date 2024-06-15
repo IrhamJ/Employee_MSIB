@@ -36,7 +36,9 @@ BEGIN
 
     -- Output OTP
     PRINT 'OTP: ' + CAST(@otp AS VARCHAR);
-END
+END;
+GO
+
 
 DROP PROCEDURE GenerateOTP
 

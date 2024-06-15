@@ -1,3 +1,6 @@
+USE 
+final_project_employee
+GO
 CREATE PROCEDURE LogSalaryHistory
     @id_employee INT
 AS

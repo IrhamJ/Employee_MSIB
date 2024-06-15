@@ -94,7 +94,7 @@ BEGIN
 
     -- Step 10: Generate OTP for the new account
     DECLARE @otp INT;
-    EXEC GenerateOTP @inputEmail = @email;
+    EXEC GenerateOTP @inputEmail = @email, @otp = @otp OUTPUT;
 
     -- Step 11: Insert data into tbl_account
     INSERT INTO tbl_account (id, username, password, otp, is_expired, is_used)
@@ -104,21 +104,22 @@ BEGIN
     PRINT 'Employee Added';
 END;
 GO
-SELECT * FROM tbl_employee
 
+DROP procedure AddEmployee
+SELECT * FROM tbl_employee
+SELECT * FROM tbl_account
+DELETE FROM tbl_employee WHERE id = 12;
 EXEC AddEmployee 
-    @id = 11,
+    @id = 12,
     @first_name = 'John',
-    @last_name = 'Doe',
+    @last_name = 'Devee',
     @gender = 'Male',
-    @email = 'john.doe@example.com',
+    @email = 'john.dove@example.com',
     @phone = '1234567890',
     @hire_date = '2024-01-01',
     @salary = 2,
-	@otp = 277634,
     @manager_id = 2,
     @job = 'AppDevJr',
     @department = 600100,
     @password = 'Password@123',
     @confirm_password = 'Password@123';
-
