@@ -3,25 +3,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
--- Author:		Irvandhar
+-- Author:                Irvandhar
 -- Create date: 10/06/2024
--- Description:	Menambahkan data ke table job histories dengan status "Hand Over",
---				ketika ada perubahan pada table employee kolom job
+-- Description:        Menambahkan data ke table job histories dengan status "Hand Over",
+--                                ketika ada perubahan pada table employee kolom job
 -- =============================================
 CREATE TRIGGER tr_update_employee_job
 ON tbl_employee
 AFTER UPDATE
 AS
 BEGIN
-<<<<<<< Updated upstream
-=======
     DECLARE @context VARBINARY(128);
     SELECT @context = CONTEXT_INFO();
     -- Only update from SP_udapte_employee
     IF @context = CAST('SP_update_employee' AS VARBINARY(128))
 
->>>>>>> Stashed changes
-	INSERT INTO tbl_job_histories (id_employee, start_date, end_date, status, job, department)
+        INSERT INTO tbl_job_histories (id_employee, start_date, end_date, status, job, department)
     SELECT 
         i.id, GETDATE(), NULL, 'Hand Over', i.job, i.department      
     FROM inserted i; 
