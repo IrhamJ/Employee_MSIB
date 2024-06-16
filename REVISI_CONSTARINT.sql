@@ -34,8 +34,15 @@ EXEC sp_helpconstraint 'tbl_account_roles'
 ALTER TABLE tbl_account_roles  ALTER COLUMN role INT NOT NULL;
 ALTER TABLE tbl_account_roles  ALTER COLUMN account INT NULL;
 
-ALTER TABLE tbl_account_roles ADD CONSTRAINT FK_tbl_account_roles_role FOREIGN KEY (role) REFERENCES tbl_roles(id)ON DELETE NO ACTION;
-ALTER TABLE tbl_account_roles ADD CONSTRAINT FK_tbl_account_roles_account FOREIGN KEY (account) REFERENCES tbl_account(id)ON DELETE SET NULL;
+ALTER TABLE tbl_account_roles 
+ADD CONSTRAINT FK_tbl_account_roles_role 
+FOREIGN KEY (role) REFERENCES tbl_roles(id)
+ON DELETE NO ACTION;
+
+ALTER TABLE tbl_account_roles 
+ADD CONSTRAINT FK_tbl_account_roles_account 
+FOREIGN KEY (account) REFERENCES tbl_account(id)
+ON DELETE SET NULL;
 
 ALTER TABLE tbl_account_roles
 DROP CONSTRAINT FK_tbl_account_roles_account;
@@ -52,7 +59,10 @@ ALTER TABLE tbl_employee ALTER COLUMN id INT NULL;
 ALTER TABLE tbl_account
 DROP CONSTRAINT FK_tbl_account_roles;
 
-ALTER TABLE tbl_account ADD CONSTRAINT FK_tbl_account_roles FOREIGN KEY (id) REFERENCES tbl_employee(id)ON DELETE NO ACTION;
+ALTER TABLE tbl_account 
+ADD CONSTRAINT FK_tbl_account_roles 
+FOREIGN KEY (id) REFERENCES tbl_employee(id)
+ON DELETE NO ACTION;
 --sebelum input data di tbl_employee, hapus constraint ini dulu, setelah itu input data employeee lalu input data account 
 
 --tbl_region
@@ -120,10 +130,20 @@ ALTER TABLE tbl_employee ALTER COLUMN department INT NOT NULL;
 ALTER TABLE tbl_employee ALTER COLUMN job VARCHAR(10) NOT NULL;
 ALTER TABLE tbl_employee ALTER COLUMN salary int  NOT NULL;
 
-ALTER TABLE tbl_employee ADD CONSTRAINT FK_TBL_Department_employee FOREIGN KEY (department) REFERENCES tbl_departments (id) ON DELETE NO ACTION;
+ALTER TABLE tbl_employee 
+ADD CONSTRAINT FK_TBL_Department_employee 
+FOREIGN KEY (department) REFERENCES tbl_departments (id) 
+ON DELETE NO ACTION;
 
-ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_salary_employee FOREIGN KEY (salary) REFERENCES tbl_salary (id)ON DELETE NO ACTION;
-ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_jobs_employee FOREIGN KEY (job) REFERENCES tbl_jobs (id)ON DELETE NO ACTION;
+ALTER TABLE tbl_employee 
+ADD CONSTRAINT FK_tbl_salary_employee 
+FOREIGN KEY (salary) REFERENCES tbl_salary (id)
+ON DELETE NO ACTION;
+
+ALTER TABLE tbl_employee 
+ADD CONSTRAINT FK_tbl_jobs_employee 
+FOREIGN KEY (job) REFERENCES tbl_jobs (id)
+ON DELETE NO ACTION;
 
 --tbl_jobs
 EXEC sp_helpconstraint 'tbl_jobs'

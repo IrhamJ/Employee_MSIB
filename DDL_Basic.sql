@@ -46,11 +46,19 @@ ALTER TABLE tbl_permission ADD CONSTRAINT PK_tbl_permission PRIMARY KEY (id);
 
 /*tbl_role_permissions*/
 ALTER TABLE tbl_role_permissions ALTER COLUMN id INT NOT NULL;
+ALTER TABLE tbl_role_permissions ALTER COLUMN permission INT NULL;
 ALTER TABLE tbl_role_permissions ALTER COLUMN role INT NOT NULL;
-ALTER TABLE tbl_role_permissions ALTER COLUMN permission INT NOT NULL;
 ALTER TABLE tbl_role_permissions ADD CONSTRAINT PK_tbl_role_permissions PRIMARY KEY (id);
-ALTER TABLE tbl_role_permissions ADD CONSTRAINT FK_tbl_role_permissions_permission FOREIGN KEY (permission) REFERENCES tbl_permission(id);
-ALTER TABLE tbl_role_permissions ADD CONSTRAINT FK_tbl_role_permissions_role FOREIGN KEY (role) REFERENCES tbl_roles(id);
+
+ALTER TABLE tbl_role_permissions
+ADD CONSTRAINT FK_tbl_role_permissions_permission
+FOREIGN KEY (permission) REFERENCES tbl_permission(id)
+ON DELETE NO ACTION;
+
+ALTER TABLE tbl_role_permissions
+ADD CONSTRAINT FK_tbl_role_permissions_role
+FOREIGN KEY (role) REFERENCES tbl_roles(id)
+ON DELETE NO ACTION;
 
 /*tbl_roles*/
 ALTER TABLE tbl_roles ALTER COLUMN id INT NOT NULL;
@@ -59,11 +67,19 @@ ALTER TABLE tbl_roles ADD CONSTRAINT PK_tbl_roles PRIMARY KEY (id);
 
 /*tbl_account_roles*/
 ALTER TABLE tbl_account_roles ALTER COLUMN id INT NOT NULL;
-ALTER TABLE tbl_account_roles ALTER COLUMN account INT NOT NULL;
-ALTER TABLE tbl_account_roles ALTER COLUMN role INT NOT NULL;
+ALTER TABLE tbl_account_roles  ALTER COLUMN role INT NOT NULL;
+ALTER TABLE tbl_account_roles  ALTER COLUMN account INT NULL;
 ALTER TABLE tbl_account_roles ADD CONSTRAINT PK_tbl_account_roles PRIMARY KEY (id);
-ALTER TABLE tbl_account_roles ADD CONSTRAINT FK_tbl_account_roles_role FOREIGN KEY (role) REFERENCES tbl_roles(id);
-ALTER TABLE tbl_account_roles ADD CONSTRAINT FK_tbl_account_roles_account FOREIGN KEY (account) REFERENCES tbl_account(id);
+
+ALTER TABLE tbl_account_roles 
+ADD CONSTRAINT FK_tbl_account_roles_role 
+FOREIGN KEY (role) REFERENCES tbl_roles(id)
+ON DELETE NO ACTION;
+
+ALTER TABLE tbl_account_roles 
+ADD CONSTRAINT FK_tbl_account_roles_account 
+FOREIGN KEY (account) REFERENCES tbl_account(id)
+ON DELETE SET NULL;
 
 /*tbl_account*/
 ALTER TABLE tbl_account ALTER COLUMN id INT NOT NULL;
@@ -71,7 +87,11 @@ ALTER TABLE tbl_account ALTER COLUMN username VARCHAR(25) NOT NULL;
 ALTER TABLE tbl_account ALTER COLUMN password VARCHAR(255) NOT NULL;
 ALTER TABLE tbl_account ALTER COLUMN otp INT NOT NULL;
 ALTER TABLE tbl_account ADD CONSTRAINT PK_tbl_account PRIMARY KEY (id);
-ALTER TABLE tbl_account ADD CONSTRAINT FK_tbl_account_employee FOREIGN KEY (id) REFERENCES tbl_employee(id);
+
+ALTER TABLE tbl_account 
+ADD CONSTRAINT FK_tbl_account_roles 
+FOREIGN KEY (id) REFERENCES tbl_employee(id)
+ON DELETE NO ACTION;
 
 /*End Constraint */
 
@@ -127,32 +147,54 @@ ALTER TABLE tbl_regions ADD CONSTRAINT PK_TBL_REGIONS PRIMARY KEY (id);
 ALTER TABLE tbl_countries ALTER COLUMN id char(3) NOT NULL;
 ALTER TABLE tbl_countries ALTER COLUMN region int NOT NULL;
 ALTER TABLE tbl_countries ADD CONSTRAINT PK_TBL_Countries PRIMARY KEY (id); 
-ALTER TABLE tbl_countries ADD CONSTRAINT FK_TBL_REGIONS FOREIGN KEY (region) REFERENCES tbl_regions (id);
 
+ALTER TABLE tbl_countries
+ADD CONSTRAINT FK_tbl_countries_regions
+FOREIGN KEY (region) REFERENCES tbl_regions(id)
+ON DELETE NO ACTION;
 -- TBL Locations
 ALTER TABLE tbl_locations ALTER COLUMN id int NOT NULL;
 ALTER TABLE tbl_locations ALTER COLUMN country char(3) NOT NULL;
 ALTER TABLE tbl_locations ADD CONSTRAINT PK_TBL_Locations PRIMARY KEY (id); 
-ALTER TABLE tbl_locations ADD CONSTRAINT FK_TBL_Countries FOREIGN KEY (country) REFERENCES tbl_countries (id);
 
+ALTER TABLE tbl_locations
+ADD CONSTRAINT FK_TBL_Countries
+FOREIGN KEY (country) REFERENCES tbl_countries(id)
+ON DELETE NO ACTION;
 -- TBL Departments
 ALTER TABLE tbl_departments ALTER COLUMN id int NOT NULL;
 ALTER TABLE tbl_departments ALTER COLUMN location int NOT NULL;
 ALTER TABLE tbl_departments ADD CONSTRAINT PK_TBL_Departments PRIMARY KEY (id); 
-ALTER TABLE tbl_departments ADD CONSTRAINT FK_TBL_Location FOREIGN KEY (location) REFERENCES tbl_locations (id);
 
+ALTER TABLE tbl_departments
+ADD CONSTRAINT FK_TBL_Location
+FOREIGN KEY (location) REFERENCES tbl_locations(id)
+ON DELETE NO ACTION;
 -- TBL Employees
 ALTER TABLE tbl_employee ALTER COLUMN id int NOT NULL;
 ALTER TABLE tbl_employee ADD CONSTRAINT PK_TBL_Employee PRIMARY KEY (id);
 ALTER TABLE tbl_employee ALTER COLUMN email VARCHAR(25) NOT NULL;
 ALTER TABLE tbl_employee ADD CONSTRAINT UQ_tbl_Employee_email UNIQUE (email);
 ALTER TABLE tbl_employee ALTER COLUMN department int NOT NULL;
-ALTER TABLE tbl_employee ADD CONSTRAINT FK_TBL_Department FOREIGN KEY (department) REFERENCES tbl_departments (id);
 ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_employee_manager FOREIGN KEY (manager) REFERENCES tbl_employee(id);
 ALTER TABLE tbl_employee ALTER COLUMN salary int NOT NULL;
-ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_salary_employee FOREIGN KEY (salary) REFERENCES tbl_salary (id);
 ALTER TABLE tbl_employee ALTER COLUMN job VARCHAR(10) NOT NULL;
-ALTER TABLE tbl_employee ADD CONSTRAINT FK_tbl_jobs_employee FOREIGN KEY (job) REFERENCES tbl_jobs (id);
+
+ALTER TABLE tbl_employee 
+ADD CONSTRAINT FK_TBL_Department_employee 
+FOREIGN KEY (department) REFERENCES tbl_departments (id) 
+ON DELETE NO ACTION;
+
+ALTER TABLE tbl_employee 
+ADD CONSTRAINT FK_tbl_salary_employee 
+FOREIGN KEY (salary) REFERENCES tbl_salary (id)
+ON DELETE NO ACTION;
+
+ALTER TABLE tbl_employee 
+ADD CONSTRAINT FK_tbl_jobs_employee 
+FOREIGN KEY (job) REFERENCES tbl_jobs (id)
+ON DELETE NO ACTION;
+
 -- END CONSTRAINT --
 -- Irham J
 
@@ -213,14 +255,22 @@ ALTER TABLE tbl_jobs ALTER COLUMN title varchar(35) NOT NULL;
 --tbl_job_histories
 SELECT * FROM tbl_job_histories;
 ALTER TABLE tbl_job_histories ALTER COLUMN id_employee INT NOT NULL;
-ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_Employee_history FOREIGN KEY (id_employee) REFERENCES tbl_employee (id);
 ALTER TABLE tbl_job_histories ALTER COLUMN start_date DATE NOT NULL;
-ALTER TABLE tbl_job_histories ADD CONSTRAINT PK_tbl_job_histories PRIMARY KEY (start_date);
 ALTER TABLE tbl_job_histories ALTER COLUMN status varchar(10) NOT NULL;
 ALTER TABLE tbl_job_histories ALTER COLUMN job varchar(10) NOT NULL;
 ALTER TABLE tbl_job_histories ALTER COLUMN department int NOT NULL;
-ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_tbl_jobs FOREIGN KEY (job) REFERENCES tbl_jobs (id);
-ALTER TABLE tbl_job_histories ADD CONSTRAINT FK_tbl_Department_JoB_History FOREIGN KEY (department) REFERENCES tbl_departments (id);
+ALTER TABLE tbl_job_histories ADD CONSTRAINT PK_tbl_job_histories PRIMARY KEY (id_employee, start_date);
+
+ALTER TABLE tbl_job_histories
+ADD CONSTRAINT FK_tbl_Department_JoB_History
+FOREIGN KEY (department) REFERENCES tbl_departments(id)
+ON DELETE NO ACTION;
+
+ALTER TABLE tbl_job_histories
+ADD CONSTRAINT FK_tbl_jobs
+FOREIGN KEY (job) REFERENCES tbl_jobs(id)
+ON DELETE NO ACTION;
+
 --tbl_absensi
 ALTER TABLE tbl_absensi alter column id INT NOT NULL;
 ALTER TABLE tbl_absensi ADD CONSTRAINT PK_tbl_absensi PRIMARY KEY(id);
@@ -242,6 +292,6 @@ ALTER TABLE tbl_salary_history ADD CONSTRAINT FK_Employee__salary_history FOREIG
 ALTER TABLE tbl_salary_history ALTER COLUMN status varchar(10) NOT NULL;
 ALTER TABLE tbl_salary_history ALTER COLUMN id_salary int NOT NULL;
 ALTER TABLE tbl_salary_history ALTER COLUMN job varchar(10) NOT NULL;
-ALTER TABLE tbl_salary_history ALTER COLUMN department int NOT NULL;|
+ALTER TABLE tbl_salary_history ALTER COLUMN department int NOT NULL;
 ALTER TABLE tbl_salary_history ADD CONSTRAINT FK_Department_Salary_History FOREIGN KEY (department) REFERENCES tbl_departments (id);
 /*End Jihan Azzahra*/
