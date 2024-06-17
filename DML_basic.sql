@@ -5,11 +5,8 @@ INSERT INTO tbl_permission (id, name) --ADD PERMISSION MUNGKIN BISA DI MULAI DAR
 VALUES (100001, 'Add_Employee'),(100002, 'Edit_Employee'),(100003, 'Edit_Profile'),
 (100004, 'Change_Pass'),(100005, 'Add_Job'),(100006, 'Edit_Job');
 
-<<<<<<< Updated upstream
-=======
 DELETE FROM tbl_permission
 
->>>>>>> Stashed changes
 SELECT id,name FROM tbl_permission;
 
 INSERT INTO tbl_roles (id, name) --ADD ROLES MUNGKIN BISA DI MULAI DARI 1X0X00
