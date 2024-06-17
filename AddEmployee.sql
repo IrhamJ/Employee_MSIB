@@ -11,7 +11,7 @@ CREATE PROCEDURE AddEmployee
     @phone NVARCHAR(20),
     @hire_date DATE,
     @salary INT,
-    @manager_id INT,
+    @manager_id INT = NULL,
     @job NVARCHAR(10),
     @department INT,
     @password NVARCHAR(100),
@@ -82,12 +82,12 @@ BEGIN
     END
 
     -- Step 8: Check Manager Id in Table Employee
-    IF NOT EXISTS (SELECT 1 FROM tbl_employee WHERE id = @manager_id)
+    IF @manager_id IS NOT NULL AND NOT EXISTS (SELECT 1 FROM tbl_employee WHERE id = @manager_id)
     BEGIN
         PRINT 'Manager Id not Found!';
         RETURN;
     END
-
+	
     -- Step 9: Insert data into tbl_employee
     INSERT INTO tbl_employee (id, first_name, last_name, gender, email, phone, hire_date, salary, manager, job, department)
     VALUES (@id, @first_name, @last_name, @gender, @email, @phone, @hire_date, @salary, @manager_id, @job, @department);
@@ -100,25 +100,36 @@ BEGIN
     INSERT INTO tbl_account (id, username, password, otp, is_expired, is_used)
     VALUES (@id, @email, @password, @otp, DATEADD(MINUTE, 10, GETDATE()), 0);
 
-    -- Step 12: Print success message
+   
+	-- Step 12: Insert data into tbl_account_roles
+    INSERT INTO tbl_account_roles (id, account, role)
+    SELECT 
+        @id,
+        @id,
+        CASE 
+            WHEN @manager_id IS NULL THEN 130300 -- Jika kolom manager NULL
+            ELSE 140400 -- Jika kolom manager tidak NULL
+        END;
+	-- Step 13: Print success message
     PRINT 'Employee Added';
 END;
 GO
-
+SELECT * FROM tbl_roles
 DROP procedure AddEmployee
 SELECT * FROM tbl_employee
 SELECT * FROM tbl_account
+SELECT * FROM tbl_account_roles
 DELETE FROM tbl_employee WHERE id = 12;
 EXEC AddEmployee 
-    @id = 12,
-    @first_name = 'John',
-    @last_name = 'Devee',
+    @id = 19,
+    @first_name = 'Jihan',
+    @last_name = 'Dhar',
     @gender = 'Male',
-    @email = 'john.dove@example.com',
-    @phone = '1234567890',
+    @email = 'Dhar.jihan@example.com',
+    @phone = '1224237890',
     @hire_date = '2024-01-01',
     @salary = 2,
-    @manager_id = 2,
+    @manager_id = NULL,
     @job = 'AppDevJr',
     @department = 600100,
     @password = 'Password@123',
