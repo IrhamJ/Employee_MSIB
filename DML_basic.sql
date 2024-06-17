@@ -5,6 +5,11 @@ INSERT INTO tbl_permission (id, name) --ADD PERMISSION MUNGKIN BISA DI MULAI DAR
 VALUES (100001, 'Add_Employee'),(100002, 'Edit_Employee'),(100003, 'Edit_Profile'),
 (100004, 'Change_Pass'),(100005, 'Add_Job'),(100006, 'Edit_Job');
 
+<<<<<<< Updated upstream
+=======
+DELETE FROM tbl_permission
+
+>>>>>>> Stashed changes
 SELECT id,name FROM tbl_permission;
 
 INSERT INTO tbl_roles (id, name) --ADD ROLES MUNGKIN BISA DI MULAI DARI 1X0X00
@@ -143,26 +148,28 @@ SELECT id, title, min_salary, max_salary FROM tbl_jobs;
 --INSERT INTO tbl_job_histories
 INSERT INTO tbl_job_histories (id_employee, start_date, end_date, status, job, department)
 VALUES
-(1, '2010-08-18', '2012-10-11', 'Resigned', 'AppDevJr', 600100),
-(2, '2013-01-15', '2015-06-20', 'Promoted', 'WebDevSr', 600300),
-(3, '2016-02-25', '2018-09-30', 'Transfer', 'DataSci', 600200),
-(4, '2019-11-01', '2021-12-31', 'Terminated', 'ProjMgr', 600400),
-(5, '2008-07-15', '2019-11-05', 'Retired', 'UXDes', 600300);
+(1, '2008-08-18', '2012-10-11', 'Resigned', 'AppDevJr', 600100),
+(2, '2013-01-15', '2015-06-20', 'Promoted', 'WebDevSr', 600200),
+(3, '2016-02-25', '2018-09-30', 'Transfer', 'DataSci', 600300),
+(4, '2018-07-15', '2022-11-05', 'Retired', 'UXDes', 600400),
+(5, '2019-11-01', '2021-12-31', 'Terminated', 'ProjMgr', 600500);
+
 
 SELECT id_employee, start_date, end_date, status, job, department
 FROM tbl_job_histories;
 
---INSERT INTO salary
-INSERT INTO tbl_salary (id, salary_per_hour, salary_per_day, working_hour, month_year, totalhour)
-VALUES 
-(2, 55000, 440000, 8, '2023-10-01', 176),
-(3, 60000, 480000, 8, '2023-10-01', 184),
-(4, 65000, 520000, 8, '2023-10-01', 152),
-(5, 70000, 560000, 8, '2023-10-01', 168),
-(6, 80000, 640000, 8, '2023-10-01', 200);
+DELETE FROM tbl_job_histories
 
-SELECT id, salary_per_hour, salary_per_day, working_hour, absensi, month_year, totalhour
-FROM tbl_salary;
+--INSERT INTO salary
+INSERT INTO tbl_salary (id, salary_per_hour, salary_per_day, working_hour, month_year, absensi, totalhour)
+VALUES 
+(2, 55000, 440000, 8, '2023-10-01', 1, 176),
+(3, 60000, 480000, 8, '2023-10-01', 2, 184),
+(4, 65000, 520000, 8, '2023-10-01', 3, 152),
+(5, 70000, 560000, 8, '2023-10-01', 4, 168),
+(6, 80000, 640000, 8, '2023-10-01', 5, 200);
+
+SELECT * FROM tbl_salary;
 
 --INSERT INTO absensi
 INSERT INTO tbl_absensi (id, id_employee, clock_in, clock_out, status, time)
@@ -172,6 +179,8 @@ VALUES
 (3, 103, '2023-10-01 08:30:00', '2023-10-01 17:30:00', 'Present', '09:00:00'),
 (4, 104, '2023-10-01 08:45:00', '2023-10-01 17:45:00', 'Present', '09:00:00'),
 (5, 105, '2023-10-01 09:00:00', '2023-10-01 18:00:00', 'Present', '09:00:00');
+
+SELECT * FROM tbl_absensi
 
 --INSERT INTO salary_history
 INSERT INTO tbl_salary_history (id_employee, id_salary, end_date, status, job, department)
