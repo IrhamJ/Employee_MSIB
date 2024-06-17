@@ -5,4 +5,4 @@ Project MSIB Kelompok 5 Employee Management System
 2. Irham Jundurrahmaan
 3. Jihan Azzahra Syamsumar Putri
 
-Branch main merupakan inisialisasi database pada file DDL_Basic.sql dan juga Readme sebagai halaman header kelompok 5
+Branch Trigger merupakan semua file kode query sesuai dengan requirement trigger di document
