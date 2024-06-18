@@ -142,21 +142,6 @@ VALUES
 
 SELECT id, title, min_salary, max_salary FROM tbl_jobs;
 
---INSERT INTO tbl_job_histories
-INSERT INTO tbl_job_histories (id_employee, start_date, end_date, status, job, department)
-VALUES
-(1, '2008-08-18', '2012-10-11', 'Resigned', 'AppDevJr', 600100),
-(2, '2013-01-15', '2015-06-20', 'Promoted', 'WebDevSr', 600200),
-(3, '2016-02-25', '2018-09-30', 'Transfer', 'DataSci', 600300),
-(4, '2018-07-15', '2022-11-05', 'Retired', 'UXDes', 600400),
-(5, '2019-11-01', '2021-12-31', 'Terminated', 'ProjMgr', 600500);
-
-
-SELECT id_employee, start_date, end_date, status, job, department
-FROM tbl_job_histories;
-
-DELETE FROM tbl_job_histories
-
 --INSERT INTO salary
 INSERT INTO tbl_salary (id, salary_per_hour, salary_per_day, working_hour, month_year, absensi, totalhour)
 VALUES 
